@@ -84,18 +84,3 @@ function calculate(donemId, komiteSayisi) {
     resultDiv.textContent = `Kaldınız! Dönem Sonu Notunuz: ${toplamNot.toFixed(2)}`;
   }
 }
-hepsi60 && ortalama >= 75) {
-    sonucDiv.innerHTML = `Ders kurulu ortalamanız: <b>${ortalama}</b><br>
-      Tüm notlar 60 ve üzeri olduğu için final sınavına girmeden geçtiniz!`;
-    return;
-  }
-
-  const minFinal = ((60 - ortalama * 0.6) / 0.4).toFixed(2);
-  if (minFinal > 100) {
-    sonucDiv.innerHTML = `Ders kurulu ortalamanız: <b>${ortalama}</b><br>
-      Finalden <b>${minFinal}</b> almanız gerekiyor, bu mümkün olmadığı için sınıfta kalıyorsunuz.`;
-  } else {
-    sonucDiv.innerHTML = `Ders kurulu ortalamanız: <b>${ortalama}</b><br>
-      Final sınavından geçmek için minimum <b>${minFinal}</b> almanız gerekiyor.`;
-  }
-}
