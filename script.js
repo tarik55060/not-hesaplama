@@ -27,7 +27,7 @@ function calculate(donemId, komiteSayisi) {
   if (ortalama >= 75) {
     resultDiv.textContent = `Finalsiz geçtiniz! Ortalamanız: ${ortalama.toFixed(2)}`;
 
-    // Konfeti patlat
+    // Konfeti
     if (typeof confetti === 'function') {
       confetti({
         particleCount: 150,
@@ -36,10 +36,8 @@ function calculate(donemId, komiteSayisi) {
       });
     }
 
-    // Görseli göster
     imgEl.src = 'finalsiz-gectiniz.jpg';
     imgEl.style.display = 'block';
-
     return;
   }
 
@@ -74,7 +72,7 @@ function calculate(donemId, komiteSayisi) {
   }
 }
 
-// Sekme butonlarına tıklamaları bağla (mobil uyumlu)
+// Sekmelerin tıklanabilir olmasını sağlar
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('.tabs button').forEach(button => {
     button.addEventListener('click', function () {
@@ -84,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Sekmeleri yönetmek için fonksiyon
+// Sekmeyi aktif hale getirir
 function showSection(id) {
   document.querySelectorAll('.tab-content').forEach(div => {
     div.classList.remove('active');
