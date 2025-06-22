@@ -7,10 +7,12 @@ function showSection(id) {
 
 function calculate(donemId, komiteSayisi) {
   let toplam = 0;
-  
+  function calculate(donemId, komiteSayisi) {
+  let toplam = 0;
+
   const imgEl = document.getElementById(`${donemId}image`);
-imgEl.style.display = 'none';
-imgEl.src = '';
+  imgEl.style.display = 'none';
+  imgEl.src = '';
 
   for (let i = 1; i <= komiteSayisi; i++) {
     const komiteInput = document.getElementById(`${donemId}k${i}`);
@@ -33,6 +35,20 @@ imgEl.src = '';
 
   if (ortalama >= 75) {
     resultDiv.textContent = `Finalsiz geçtiniz! Ortalamanız: ${ortalama.toFixed(2)}`;
+
+    // Konfeti patlat
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+    }
+
+    // Görseli göster
+    imgEl.src = 'finalsiz-gectiniz.jpg';
+    imgEl.style.display = 'block';
+
     return;
   }
 
@@ -41,7 +57,6 @@ imgEl.src = '';
   const ortalama60 = yuvarlanmisOrtalama * 0.6;
 
   if (finalNotStr === '') {
-    // Final notu girilmemişse, geçmek için gereken minimum final notunu hesapla
     const gerekenFinal = ((59.5 - ortalama60) / 0.4).toFixed(2);
     if (gerekenFinal > 100) {
       resultDiv.textContent = `Geçmek için finalden ${gerekenFinal} almanız gerekiyor. Bu mümkün değil, kaldınız.`;
@@ -67,22 +82,4 @@ imgEl.src = '';
   } else {
     resultDiv.textContent = `Kaldınız! Dönem Sonu Notunuz: ${toplamNot.toFixed(2)}`;
   }
-  if (ortalama >= 75) {
-  resultDiv.textContent = `Finalsiz geçtiniz! Ortalamanız: ${ortalama.toFixed(2)}`;
-
-  // Konfeti patlat
-  confetti({
-    particleCount: 150,
-    spread: 100,
-    origin: { y: 0.6 }
-  });
-
-  // Görseli göster
-  const imgEl = document.getElementById(`${donemId}image`);
-  imgEl.src = 'finalsiz-gectiniz.jpg';
-  imgEl.style.display = 'block';
-
-  return;
-}
-
 }
