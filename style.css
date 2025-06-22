@@ -25,6 +25,10 @@ h1 {
   text-align: center;
 }
 
+.tab-content.active {
+  display: block;
+}
+
 .inputs input {
   margin: 5px;
   padding: 5px;
