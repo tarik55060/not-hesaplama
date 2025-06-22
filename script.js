@@ -1,16 +1,18 @@
 function showSection(donem) {
   for (let i = 1; i <= 3; i++) {
     const sec = document.getElementById(`donem${i}`);
+    const btn = document.getElementById(`btn${i}`);
     if (i === donem) {
       sec.classList.add("active");
+      btn.classList.add("active");
     } else {
       sec.classList.remove("active");
+      btn.classList.remove("active");
     }
   }
 }
 
 function yuvarlaNot(not) {
-  // 0.5 ve üzeri yukarı, altında aşağı
   return not % 1 >= 0.5 ? Math.ceil(not) : Math.floor(not);
 }
 
@@ -28,22 +30,18 @@ function hesaplaDonem(donem) {
     toplamKomiteNotu += val;
   }
 
-  let finalNotInput = document.getElementById(`d${donem}finalNot`);
-  const finalNot = parseFloat(finalNotInput.value);
+  const finalInput = document.getElementById(`d${donem}finalNot`);
+  const finalNot = parseFloat(finalInput.value);
 
   if (isNaN(finalNot) || finalNot < 0 || finalNot > 100) {
     alert(`Lütfen Dönem ${donem} final notu için 0-100 arasında geçerli bir not giriniz.`);
     return;
   }
 
-  // Ortalama komite notu
   const ortalamaKomiteNotu = toplamKomiteNotu / komiteSayisi;
   const ortalamaYuvarla = yuvarlaNot(ortalamaKomiteNotu);
 
-  // Dönem sonu başarı notu = (komite ortalama * 0.6) + (final * 0.4)
   const basariNotuHesap = ortalamaYuvarla * 0.6 + finalNot * 0.4;
-
-  // Virgülden sonra ilk rakam 5 veya üzeri ise yukarı yuvarla
   const basariNotu = basariNotuHesap % 1 >= 0.5 ? Math.ceil(basariNotuHesap) : Math.floor(basariNotuHesap);
 
   const sonucEl = document.getElementById(`d${donem}sonuc`);
