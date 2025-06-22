@@ -1,13 +1,4 @@
-function showSection(id) {
-  document.querySelectorAll('.tab-content').forEach(div => {
-    div.classList.remove('active');
-  });
-  document.getElementById(id).classList.add('active');
-}
-
 function calculate(donemId, komiteSayisi) {
-  let toplam = 0;
-  function calculate(donemId, komiteSayisi) {
   let toplam = 0;
 
   const imgEl = document.getElementById(`${donemId}image`);
@@ -52,7 +43,6 @@ function calculate(donemId, komiteSayisi) {
     return;
   }
 
-  // Ortalamayı en yakın tam sayıya yuvarla
   const yuvarlanmisOrtalama = Math.round(ortalama);
   const ortalama60 = yuvarlanmisOrtalama * 0.6;
 
@@ -82,7 +72,9 @@ function calculate(donemId, komiteSayisi) {
   } else {
     resultDiv.textContent = `Kaldınız! Dönem Sonu Notunuz: ${toplamNot.toFixed(2)}`;
   }
+}
 
+// Sekme butonlarına tıklamaları bağla (mobil uyumlu)
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('.tabs button').forEach(button => {
     button.addEventListener('click', function () {
@@ -92,4 +84,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Sekmeleri yönetmek için fonksiyon
+function showSection(id) {
+  document.querySelectorAll('.tab-content').forEach(div => {
+    div.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
 }
