@@ -3,96 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dönem Not Hesaplama</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    nav { margin-bottom: 20px; }
-    nav button {
-      margin-right: 10px;
-      padding: 8px 16px;
-      cursor: pointer;
-      border: none;
-      background-color: #eee;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-    nav button.active {
-      background-color: #4285f4;
-      color: white;
-    }
-    section { display: none; }
-    section.active { display: block; }
-    input[type=number] { width: 60px; margin-right: 10px; }
-    .komite-group { margin-bottom: 15px; }
-    label { margin-right: 10px; }
-    button.calc-btn {
-      background-color: #4285f4;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    p.result {
-      margin-top: 15px;
-      font-size: 1.1em;
-    }
-  </style>
+  <title>Dönem Notu Hesaplama</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <h1>Dönem Notu Hesaplama</h1>
 
-<nav>
-  <button id="btn1" class="active" onclick="showSection(1)">Dönem 1</button>
-  <button id="btn2" onclick="showSection(2)">Dönem 2</button>
-  <button id="btn3" onclick="showSection(3)">Dönem 3</button>
-</nav>
-
-<section id="donem1" class="active">
-  <h2>Dönem 1 Not Hesaplama</h2>
-  <div class="komite-group">
-    <label>Komite 1: <input type="number" id="d1komite1" min="0" max="100" step="0.1" /></label>
-    <label>Komite 2: <input type="number" id="d1komite2" min="0" max="100" step="0.1" /></label>
-    <label>Komite 3: <input type="number" id="d1komite3" min="0" max="100" step="0.1" /></label>
-    <label>Komite 4: <input type="number" id="d1komite4" min="0" max="100" step="0.1" /></label>
-    <label>Komite 5: <input type="number" id="d1komite5" min="0" max="100" step="0.1" /></label>
+  <div class="tabs">
+    <button onclick="showSection('donem1')">Dönem 1</button>
+    <button onclick="showSection('donem2')">Dönem 2</button>
+    <button onclick="showSection('donem3')">Dönem 3</button>
   </div>
-  <label>Final Notu: <input type="number" id="d1finalNot" min="0" max="100" step="0.1" /></label><br/>
-  <button class="calc-btn" onclick="hesaplaDonem(1)">Hesapla</button>
-  <p id="d1sonuc" class="result"></p>
-</section>
 
-<section id="donem2">
-  <h2>Dönem 2 Not Hesaplama</h2>
-  <div class="komite-group">
-    <label>Komite 1: <input type="number" id="d2komite1" min="0" max="100" step="0.1" /></label>
-    <label>Komite 2: <input type="number" id="d2komite2" min="0" max="100" step="0.1" /></label>
-    <label>Komite 3: <input type="number" id="d2komite3" min="0" max="100" step="0.1" /></label>
-    <label>Komite 4: <input type="number" id="d2komite4" min="0" max="100" step="0.1" /></label>
-    <label>Komite 5: <input type="number" id="d2komite5" min="0" max="100" step="0.1" /></label>
-    <label>Komite 6: <input type="number" id="d2komite6" min="0" max="100" step="0.1" /></label>
+  <div id="donem1" class="tab-content">
+    <h2>Dönem 1 - 5 Komite</h2>
+    <div class="inputs">
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 1" id="d1k1" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 2" id="d1k2" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 3" id="d1k3" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 4" id="d1k4" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 5" id="d1k5" />
+      <br />
+      <input type="number" min="0" max="100" step="0.5" placeholder="Final Notu" id="d1final" />
+    </div>
+    <button onclick="calculate('donem1',5)">Hesapla</button>
+    <div class="result" id="d1result"></div>
   </div>
-  <label>Final Notu: <input type="number" id="d2finalNot" min="0" max="100" step="0.1" /></label><br/>
-  <button class="calc-btn" onclick="hesaplaDonem(2)">Hesapla</button>
-  <p id="d2sonuc" class="result"></p>
-</section>
 
-<section id="donem3">
-  <h2>Dönem 3 Not Hesaplama</h2>
-  <div class="komite-group">
-    <label>Komite 1: <input type="number" id="d3komite1" min="0" max="100" step="0.1" /></label>
-    <label>Komite 2: <input type="number" id="d3komite2" min="0" max="100" step="0.1" /></label>
-    <label>Komite 3: <input type="number" id="d3komite3" min="0" max="100" step="0.1" /></label>
-    <label>Komite 4: <input type="number" id="d3komite4" min="0" max="100" step="0.1" /></label>
-    <label>Komite 5: <input type="number" id="d3komite5" min="0" max="100" step="0.1" /></label>
-    <label>Komite 6: <input type="number" id="d3komite6" min="0" max="100" step="0.1" /></label>
+  <div id="donem2" class="tab-content">
+    <h2>Dönem 2 - 6 Komite</h2>
+    <div class="inputs">
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 1" id="d2k1" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 2" id="d2k2" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 3" id="d2k3" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 4" id="d2k4" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 5" id="d2k5" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 6" id="d2k6" />
+      <br />
+      <input type="number" min="0" max="100" step="0.5" placeholder="Final Notu" id="d2final" />
+    </div>
+    <button onclick="calculate('donem2',6)">Hesapla</button>
+    <div class="result" id="d2result"></div>
   </div>
-  <label>Final Notu: <input type="number" id="d3finalNot" min="0" max="100" step="0.1" /></label><br/>
-  <button class="calc-btn" onclick="hesaplaDonem(3)">Hesapla</button>
-  <p id="d3sonuc" class="result"></p>
-</section>
 
-<script src="script.js"></script>
+  <div id="donem3" class="tab-content">
+    <h2>Dönem 3 - 6 Komite</h2>
+    <div class="inputs">
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 1" id="d3k1" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 2" id="d3k2" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 3" id="d3k3" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 4" id="d3k4" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 5" id="d3k5" />
+      <input type="number" min="0" max="100" step="1" placeholder="Komite 6" id="d3k6" />
+      <br />
+      <input type="number" min="0" max="100" step="0.5" placeholder="Final Notu" id="d3final" />
+    </div>
+    <button onclick="calculate('donem3',6)">Hesapla</button>
+    <div class="result" id="d3result"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
