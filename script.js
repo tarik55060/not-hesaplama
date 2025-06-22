@@ -1,20 +1,21 @@
 function showSection(id) {
-  const sections = document.querySelectorAll('.tab-content');
-  sections.forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(div => {
+    div.classList.remove('active');
+  });
   document.getElementById(id).classList.add('active');
 }
 
 function calculate(donemId, komiteSayisi) {
   let toplam = 0;
   for (let i = 1; i <= komiteSayisi; i++) {
-    const input = document.getElementById(`${donemId}k${i}`);
-    if (!input) {
-      alert(`Input bulunamadı: ${donemId}k${i}`);
+    const komiteInput = document.getElementById(`${donemId}k${i}`);
+    if (!komiteInput) {
+      alert(`Eksik input: ${donemId}k${i}`);
       return;
     }
-    const val = parseFloat(input.value);
+    const val = parseFloat(komiteInput.value);
     if (isNaN(val)) {
-      alert(`Lütfen tüm komite notlarını doldurun!`);
+      alert('Lütfen tüm komite notlarını doldurun.');
       return;
     }
     toplam += val;
@@ -27,12 +28,12 @@ function calculate(donemId, komiteSayisi) {
 
   const finalInput = document.getElementById(`${donemId}final`);
   if (!finalInput) {
-    alert(`Final notu inputu bulunamadı!`);
+    alert('Final notu inputu bulunamadı.');
     return;
   }
   const finalNot = parseFloat(finalInput.value);
   if (isNaN(finalNot)) {
-    alert('Lütfen final notunu girin!');
+    alert('Lütfen final notunu girin.');
     return;
   }
   const final40 = finalNot * 0.4;
