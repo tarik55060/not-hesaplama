@@ -1,39 +1,89 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>ODÜ Tıp Not Hesaplama</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Not Hesaplama</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>ODÜ Tıp Dönem Sınav Hesaplayıcı</h1>
-  <div class="tabs">
-    <button onclick="showTab('donem1')">Dönem I</button>
-    <button onclick="showTab('donem2')">Dönem II</button>
-    <button onclick="showTab('donem3')">Dönem III</button>
-  </div>
 
-  <div id="donem1" class="tab-content">
-    <h2>Dönem I</h2>
-    <div class="inputs" id="inputs1"></div>
-    <button onclick="hesapla(1, 5)">Hesapla</button>
-    <div id="sonuc1" class="result"></div>
-  </div>
+<div class="tabs">
+  <button class="tablinks" onclick="openTab(event, 'donem1')">Dönem 1</button>
+  <button class="tablinks" onclick="openTab(event, 'donem2')">Dönem 2</button>
+  <button class="tablinks" onclick="openTab(event, 'donem3')">Dönem 3</button>
+</div>
 
-  <div id="donem2" class="tab-content">
-    <h2>Dönem II</h2>
-    <div class="inputs" id="inputs2"></div>
-    <button onclick="hesapla(2, 6)">Hesapla</button>
-    <div id="sonuc2" class="result"></div>
-  </div>
+<!-- Dönem 1 -->
+<div id="donem1" class="tabcontent">
+  <h3>Dönem 1</h3>
+  <p>5 Komite Notlarını Giriniz:</p>
+  <input type="number" id="d1komite1" placeholder="Komite 1" min="0" max="100" step="0.1" />
+  <input type="number" id="d1komite2" placeholder="Komite 2" min="0" max="100" step="0.1" />
+  <input type="number" id="d1komite3" placeholder="Komite 3" min="0" max="100" step="0.1" />
+  <input type="number" id="d1komite4" placeholder="Komite 4" min="0" max="100" step="0.1" />
+  <input type="number" id="d1komite5" placeholder="Komite 5" min="0" max="100" step="0.1" />
+  <p>Final Notu:</p>
+  <input type="number" id="d1final" placeholder="Final Notu" min="0" max="100" step="0.1" />
+  <br /><br />
+  <button onclick="hesaplaDonem(1)">Hesapla</button>
 
-  <div id="donem3" class="tab-content">
-    <h2>Dönem III</h2>
-    <div class="inputs" id="inputs3"></div>
-    <button onclick="hesapla(3, 6)">Hesapla</button>
-    <div id="sonuc3" class="result"></div>
-  </div>
+  <h4>Sonuç:</h4>
+  <p id="d1sonuc"></p>
 
-  <script src="script.js"></script>
+  <hr>
+
+  <h4>Son Komiteden Alınacak Nota Göre Finalden Minimum Not Hesapla</h4>
+  <p>Son Komiteden Alacağınız Notu Giriniz:</p>
+  <input type="number" id="d1sonKomiteNot" placeholder="Son Komite Notu" min="0" max="100" step="0.1" />
+  <button onclick="finalMinimiHesapla(1)">Hesapla</button>
+  <p id="d1finalMinSonuc"></p>
+</div>
+
+<!-- Dönem 2 -->
+<div id="donem2" class="tabcontent">
+  <h3>Dönem 2</h3>
+  <p>6 Komite Notlarını Giriniz:</p>
+  <input type="number" id="d2komite1" placeholder="Komite 1" min="0" max="100" step="0.1" />
+  <input type="number" id="d2komite2" placeholder="Komite 2" min="0" max="100" step="0.1" />
+  <input type="number" id="d2komite3" placeholder="Komite 3" min="0" max="100" step="0.1" />
+  <input type="number" id="d2komite4" placeholder="Komite 4" min="0" max="100" step="0.1" />
+  <input type="number" id="d2komite5" placeholder="Komite 5" min="0" max="100" step="0.1" />
+  <input type="number" id="d2komite6" placeholder="Komite 6" min="0" max="100" step="0.1" />
+  <p>Final Notu:</p>
+  <input type="number" id="d2final" placeholder="Final Notu" min="0" max="100" step="0.1" />
+  <br /><br />
+  <button onclick="hesaplaDonem(2)">Hesapla</button>
+
+  <h4>Son Komiteden Alınacak Nota Göre Finalden Minimum Not Hesapla</h4>
+  <p>Son Komiteden Alacağınız Notu Giriniz:</p>
+  <input type="number" id="d2sonKomiteNot" placeholder="Son Komite Notu" min="0" max="100" step="0.1" />
+  <button onclick="finalMinimiHesapla(2)">Hesapla</button>
+  <p id="d2finalMinSonuc"></p>
+</div>
+
+<!-- Dönem 3 -->
+<div id="donem3" class="tabcontent">
+  <h3>Dönem 3</h3>
+  <p>6 Komite Notlarını Giriniz:</p>
+  <input type="number" id="d3komite1" placeholder="Komite 1" min="0" max="100" step="0.1" />
+  <input type="number" id="d3komite2" placeholder="Komite 2" min="0" max="100" step="0.1" />
+  <input type="number" id="d3komite3" placeholder="Komite 3" min="0" max="100" step="0.1" />
+  <input type="number" id="d3komite4" placeholder="Komite 4" min="0" max="100" step="0.1" />
+  <input type="number" id="d3komite5" placeholder="Komite 5" min="0" max="100" step="0.1" />
+  <input type="number" id="d3komite6" placeholder="Komite 6" min="0" max="100" step="0.1" />
+  <p>Final Notu:</p>
+  <input type="number" id="d3final" placeholder="Final Notu" min="0" max="100" step="0.1" />
+  <br /><br />
+  <button onclick="hesaplaDonem(3)">Hesapla</button>
+
+  <h4>Son Komiteden Alınacak Nota Göre Finalden Minimum Not Hesapla</h4>
+  <p>Son Komiteden Alacağınız Notu Giriniz:</p>
+  <input type="number" id="d3sonKomiteNot" placeholder="Son Komite Notu" min="0" max="100" step="0.1" />
+  <button onclick="finalMinimiHesapla(3)">Hesapla</button>
+  <p id="d3finalMinSonuc"></p>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
