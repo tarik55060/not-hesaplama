@@ -7,6 +7,11 @@ function showSection(id) {
 
 function calculate(donemId, komiteSayisi) {
   let toplam = 0;
+  
+  const imgEl = document.getElementById(`${donemId}image`);
+imgEl.style.display = 'none';
+imgEl.src = '';
+
   for (let i = 1; i <= komiteSayisi; i++) {
     const komiteInput = document.getElementById(`${donemId}k${i}`);
     if (!komiteInput) {
@@ -62,4 +67,22 @@ function calculate(donemId, komiteSayisi) {
   } else {
     resultDiv.textContent = `Kaldınız! Dönem Sonu Notunuz: ${toplamNot.toFixed(2)}`;
   }
+  if (ortalama >= 75) {
+  resultDiv.textContent = `Finalsiz geçtiniz! Ortalamanız: ${ortalama.toFixed(2)}`;
+
+  // Konfeti patlat
+  confetti({
+    particleCount: 150,
+    spread: 100,
+    origin: { y: 0.6 }
+  });
+
+  // Görseli göster
+  const imgEl = document.getElementById(`${donemId}image`);
+  imgEl.src = 'finalsiz-gectiniz.jpg';
+  imgEl.style.display = 'block';
+
+  return;
+}
+
 }
