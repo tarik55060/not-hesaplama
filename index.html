@@ -1,73 +1,37 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dönem Not Hesaplama</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <meta charset="UTF-8">
+  <title>ODÜ Tıp Not Hesaplama</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Dönem Not Hesaplama</h1>
-
+  <h1>ODÜ Tıp Dönem Sınav Hesaplayıcı</h1>
   <div class="tabs">
-    <button data-section="donem1">Dönem 1</button>
-    <button data-section="donem2">Dönem 2</button>
-    <button data-section="donem3">Dönem 3</button>
-
+    <button onclick="showTab('donem1')">Dönem I</button>
+    <button onclick="showTab('donem2')">Dönem II</button>
+    <button onclick="showTab('donem3')">Dönem III</button>
   </div>
 
-  <!-- Dönem 1 (5 komite) -->
-  <div id="donem1" class="tab-content active">
-    <h2>Dönem 1</h2>
-    <div class="inputs">
-      <input type="number" id="donem1k1" placeholder="Komite 1" min="0" max="100" />
-      <input type="number" id="donem1k2" placeholder="Komite 2" min="0" max="100" />
-      <input type="number" id="donem1k3" placeholder="Komite 3" min="0" max="100" />
-      <input type="number" id="donem1k4" placeholder="Komite 4" min="0" max="100" />
-      <input type="number" id="donem1k5" placeholder="Komite 5" min="0" max="100" />
-      <input type="number" id="donem1final" placeholder="Final Notu" min="0" max="100" step="0.5" />
-    </div>
-    <button onclick="calculate('donem1',5)">Hesapla</button>
-    <div id="donem1result" class="result"></div>
-    <img id="donem1image" class="kutlama-resmi" style="display:none; max-width: 300px; margin-top: 10px;" />
-
+  <div id="donem1" class="tab-content">
+    <h2>Dönem I</h2>
+    <div class="inputs" id="inputs1"></div>
+    <button onclick="hesapla(1, 5)">Hesapla</button>
+    <div id="sonuc1" class="result"></div>
   </div>
 
-  <!-- Dönem 2 (6 komite) -->
   <div id="donem2" class="tab-content">
-    <h2>Dönem 2</h2>
-    <div class="inputs">
-      <input type="number" id="donem2k1" placeholder="Komite 1" min="0" max="100" />
-      <input type="number" id="donem2k2" placeholder="Komite 2" min="0" max="100" />
-      <input type="number" id="donem2k3" placeholder="Komite 3" min="0" max="100" />
-      <input type="number" id="donem2k4" placeholder="Komite 4" min="0" max="100" />
-      <input type="number" id="donem2k5" placeholder="Komite 5" min="0" max="100" />
-      <input type="number" id="donem2k6" placeholder="Komite 6" min="0" max="100" />
-      <input type="number" id="donem2final" placeholder="Final Notu" min="0" max="100" step="0.5" />
-    </div>
-    <button onclick="calculate('donem2',6)">Hesapla</button>
-    <div id="donem2result" class="result"></div>
-    <img id="donem2image" class="kutlama-resmi" style="display:none; max-width: 300px; margin-top: 10px;" />
-
+    <h2>Dönem II</h2>
+    <div class="inputs" id="inputs2"></div>
+    <button onclick="hesapla(2, 6)">Hesapla</button>
+    <div id="sonuc2" class="result"></div>
   </div>
 
-  <!-- Dönem 3 (6 komite) -->
   <div id="donem3" class="tab-content">
-    <h2>Dönem 3</h2>
-    <div class="inputs">
-      <input type="number" id="donem3k1" placeholder="Komite 1" min="0" max="100" />
-      <input type="number" id="donem3k2" placeholder="Komite 2" min="0" max="100" />
-      <input type="number" id="donem3k3" placeholder="Komite 3" min="0" max="100" />
-      <input type="number" id="donem3k4" placeholder="Komite 4" min="0" max="100" />
-      <input type="number" id="donem3k5" placeholder="Komite 5" min="0" max="100" />
-      <input type="number" id="donem3k6" placeholder="Komite 6" min="0" max="100" />
-      <input type="number" id="donem3final" placeholder="Final Notu" min="0" max="100" step="0.5" />
-    </div>
-    <button onclick="calculate('donem3',6)">Hesapla</button>
-    <div id="donem3result" class="result"></div>
-    <img id="donem3image" class="kutlama-resmi" style="display:none; max-width: 300px; margin-top: 10px;" />
-
+    <h2>Dönem III</h2>
+    <div class="inputs" id="inputs3"></div>
+    <button onclick="hesapla(3, 6)">Hesapla</button>
+    <div id="sonuc3" class="result"></div>
   </div>
 
   <script src="script.js"></script>
