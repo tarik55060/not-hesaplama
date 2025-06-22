@@ -82,4 +82,14 @@ function calculate(donemId, komiteSayisi) {
   } else {
     resultDiv.textContent = `Kaldınız! Dönem Sonu Notunuz: ${toplamNot.toFixed(2)}`;
   }
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('.tabs button').forEach(button => {
+    button.addEventListener('click', function () {
+      const target = this.getAttribute('data-section');
+      showSection(target);
+    });
+  });
+});
+
 }
