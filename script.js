@@ -1,8 +1,8 @@
 window.onload = () => {
-  createInputs(1, 5);
-  createInputs(2, 6);
-  createInputs(3, 6);
-  showTab('donem1');
+  createInputs(1, 5);  // Dönem I: 5 komite
+  createInputs(2, 6);  // Dönem II: 6 komite
+  createInputs(3, 6);  // Dönem III: 6 komite
+  showTab('donem1');   // Başlangıçta Dönem I gösterilsin
 };
 
 function showTab(tabId) {
@@ -37,23 +37,29 @@ function hesapla(donem, komiteSayisi) {
     notlar.push(val);
   }
 
-  let ortalama = notlar.reduce((a, b) => a + b, 0) / komiteSayisi;
-  ortalama = Math.round(ortalama);
-  const sonucDiv = document.getElementById(`sonuc${donem}`);
+  // (5) Ders kurulları ortalama notu = tüm komite notlarının toplamı / komite sayısı
+  const toplam = notlar.reduce((a, b) => a + b, 0);
+  let ortalama = toplam / komiteSayisi;
+  ortalama = Math.round(ortalama); // Yönetmelik: en yakın tam sayıya yuvarlanır
 
+  const sonucDiv = document.getElementById(`sonuc${donem}`);
   const hepsi60 = notlar.every(n => n >= 60);
-  if (hepsi60 && ortalama >= 75) {
-    sonucDiv.innerHTML = `Ders kurulu ortalamanız: <b>${ortalama}</b><br>
-      Tüm notlar 60 ve üzeri olduğu için final sınavına girmeden geçtiniz!`;
+
+  // (7) Otomatik geçme durumu
+  if (ortalama >= 75 && hepsi60) {
+    sonucDiv.innerHTML = `✅ Ders kurulu ortalamanız: <b>${ortalama}</b><br>
+      Tüm notlar 60 ve üzeri olduğu için <b>final sınavına girmeden geçtiniz.</b>`;
     return;
   }
 
-  const minFinal = ((60 - ortalama * 0.6) / 0.4).toFixed(2);
+  // (6) Final notu: Ortalamanın %60'ı + Final %40 ≥ 60
+  const minFinal = ((60 - (ortalama * 0.6)) / 0.4).toFixed(2);
+
   if (minFinal > 100) {
-    sonucDiv.innerHTML = `Ders kurulu ortalamanız: <b>${ortalama}</b><br>
-      Finalden <b>${minFinal}</b> almanız gerekiyor, bu mümkün olmadığı için sınıfta kalıyorsunuz.`;
+    sonucDiv.innerHTML = `❌ Ders kurulu ortalamanız: <b>${ortalama}</b><br>
+      Finalden <b>${minFinal}</b> almanız gerekiyor. Bu mümkün olmadığı için <b>sınıfta kalıyorsunuz.</b>`;
   } else {
-    sonucDiv.innerHTML = `Ders kurulu ortalamanız: <b>${ortalama}</b><br>
-      Final sınavından geçmek için minimum <b>${minFinal}</b> almanız gerekiyor.`;
+    sonucDiv.innerHTML = `ℹ️ Ders kurulu ortalamanız: <b>${ortalama}</b><br>
+      Finalden geçmek için minimum <b>${minFinal}</b> almanız gerekiyor.`;
   }
 }
