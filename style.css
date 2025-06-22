@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+h1 {
+  text-align: center;
+}
+
+.tabs {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.tab-content {
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.inputs input {
+  margin: 5px;
+  padding: 5px;
+  width: 60px;
+}
+
+.result {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
