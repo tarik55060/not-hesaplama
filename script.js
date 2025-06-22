@@ -1,53 +1,48 @@
-function showSection(donem) {
-  for (let i = 1; i <= 3; i++) {
-    const sec = document.getElementById(`donem${i}`);
-    const btn = document.getElementById(`btn${i}`);
-    if (i === donem) {
-      sec.classList.add("active");
-      btn.classList.add("active");
-    } else {
-      sec.classList.remove("active");
-      btn.classList.remove("active");
-    }
-  }
+function showSection(id) {
+  const sections = document.querySelectorAll('.tab-content');
+  sections.forEach(sec => {
+    sec.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
 }
 
-function yuvarlaNot(not) {
-  return not % 1 >= 0.5 ? Math.ceil(not) : Math.floor(not);
-}
+// Sayfa açılırken Dönem 1 sekmesini göster
+window.onload = () => {
+  showSection('donem1');
+};
 
-function hesaplaDonem(donem) {
-  const komiteSayisi = donem === 1 ? 5 : 6;
-  let toplamKomiteNotu = 0;
-
+function calculate(donemId, komiteSayisi) {
+  let toplam = 0;
   for (let i = 1; i <= komiteSayisi; i++) {
-    const input = document.getElementById(`d${donem}komite${i}`);
-    const val = parseFloat(input.value);
-    if (isNaN(val) || val < 0 || val > 100) {
-      alert(`Lütfen Dönem ${donem} Komite ${i} için 0-100 arasında geçerli bir not giriniz.`);
+    const komiteNot = parseFloat(document.getElementById(`${donemId}k${i}`).value);
+    if (isNaN(komiteNot) || komiteNot < 0 || komiteNot > 100) {
+      alert(`Lütfen ${donemId} için tüm komite notlarını 0-100 arasında doğru giriniz.`);
       return;
     }
-    toplamKomiteNotu += val;
+    toplam += komiteNot;
   }
 
-  const finalInput = document.getElementById(`d${donem}finalNot`);
-  const finalNot = parseFloat(finalInput.value);
+  const ortalama = toplam / komiteSayisi;
+  const yuvarlanmisOrtalama = Math.round(ortalama);
 
-  if (isNaN(finalNot) || finalNot < 0 || finalNot > 100) {
-    alert(`Lütfen Dönem ${donem} final notu için 0-100 arasında geçerli bir not giriniz.`);
+  const finalNotu = parseFloat(document.getElementById(`${donemId}final`).value);
+  if (isNaN(finalNotu) || finalNotu < 0 || finalNotu > 100) {
+    alert(`Lütfen ${donemId} için final notunu 0-100 arasında doğru giriniz.`);
     return;
   }
 
-  const ortalamaKomiteNotu = toplamKomiteNotu / komiteSayisi;
-  const ortalamaYuvarla = yuvarlaNot(ortalamaKomiteNotu);
+  const basariNotu = yuvarlanmisOrtalama * 0.6 + finalNotu * 0.4;
+  const yuvarlanmisBasariNotu = Math.round(basariNotu * 10) / 10; // 1 ondalık hassasiyet
 
-  const basariNotuHesap = ortalamaYuvarla * 0.6 + finalNot * 0.4;
-  const basariNotu = basariNotuHesap % 1 >= 0.5 ? Math.ceil(basariNotuHesap) : Math.floor(basariNotuHesap);
+  const gectiMi = yuvarlanmisBasariNotu >= 59.5;
 
-  const sonucEl = document.getElementById(`d${donem}sonuc`);
-  sonucEl.innerHTML = `
-    Ortalama Komite Notu (Yuvarlanmış): <strong>${ortalamaYuvarla}</strong><br/>
-    Dönem Sonu Başarı Notu: <strong>${basariNotu}</strong><br/>
-    ${basariNotu >= 60 ? "<span style='color:green'>Tebrikler, geçtiniz!</span>" : "<span style='color:red'>Maalesef, kaldınız.</span>"}
+  const sonucText = `
+    Komite Ortalaması (Yuvarlanmış): <b>${yuvarlanmisOrtalama}</b><br>
+    Dönem Sonu Başarı Notu: <b>${yuvarlanmisBasariNotu}</b><br>
+    <span style="color:${gectiMi ? 'green' : 'red'}; font-weight:bold;">
+      ${gectiMi ? 'GEÇTİNİZ!' : 'KALDINIZ!'}
+    </span>
   `;
+
+  document.getElementById(`${donemId}result`).innerHTML = sonucText;
 }
