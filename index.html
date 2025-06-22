@@ -1,88 +1,76 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Not Hesaplama</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dönem Not Hesaplama</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    nav { margin-bottom: 20px; }
+    nav button { margin-right: 10px; }
+    section { display: none; }
+    section.active { display: block; }
+    input[type=number] { width: 60px; margin-right: 5px; }
+    .komite-group { margin-bottom: 10px; }
+  </style>
 </head>
 <body>
 
-<div class="tabs">
-  <button class="tablinks" onclick="openTab(event, 'donem1')">Dönem 1</button>
-  <button class="tablinks" onclick="openTab(event, 'donem2')">Dönem 2</button>
-  <button class="tablinks" onclick="openTab(event, 'donem3')">Dönem 3</button>
-</div>
+<nav>
+  <button onclick="showSection(1)">Dönem 1</button>
+  <button onclick="showSection(2)">Dönem 2</button>
+  <button onclick="showSection(3)">Dönem 3</button>
+</nav>
 
-<!-- Dönem 1 -->
-<div id="donem1" class="tabcontent">
-  <h3>Dönem 1</h3>
-  <p>5 Komite Notlarını Giriniz:</p>
-  <input type="number" id="d1komite1" placeholder="Komite 1" min="0" max="100" step="0.1" />
-  <input type="number" id="d1komite2" placeholder="Komite 2" min="0" max="100" step="0.1" />
-  <input type="number" id="d1komite3" placeholder="Komite 3" min="0" max="100" step="0.1" />
-  <input type="number" id="d1komite4" placeholder="Komite 4" min="0" max="100" step="0.1" />
-  <input type="number" id="d1komite5" placeholder="Komite 5" min="0" max="100" step="0.1" />
-  <p>Final Notu:</p>
-  <input type="number" id="d1final" placeholder="Final Notu" min="0" max="100" step="0.1" />
-  <br /><br />
+<section id="donem1" class="active">
+  <h2>Dönem 1 Not Hesaplama</h2>
+  <div id="d1komiteler">
+    <div class="komite-group">
+      <label>Komite 1: <input type="number" id="d1komite1" min="0" max="100" step="0.1" /></label>
+      <label>Komite 2: <input type="number" id="d1komite2" min="0" max="100" step="0.1" /></label>
+      <label>Komite 3: <input type="number" id="d1komite3" min="0" max="100" step="0.1" /></label>
+      <label>Komite 4: <input type="number" id="d1komite4" min="0" max="100" step="0.1" /></label>
+      <label>Komite 5: <input type="number" id="d1komite5" min="0" max="100" step="0.1" /></label>
+    </div>
+  </div>
+  <label>Final Notu: <input type="number" id="d1finalNot" min="0" max="100" step="0.1" /></label>
   <button onclick="hesaplaDonem(1)">Hesapla</button>
-
-  <h4>Sonuç:</h4>
   <p id="d1sonuc"></p>
+</section>
 
-  <hr>
-
-  <h4>Son Komiteden Alınacak Nota Göre Finalden Minimum Not Hesapla</h4>
-  <p>Son Komiteden Alacağınız Notu Giriniz:</p>
-  <input type="number" id="d1sonKomiteNot" placeholder="Son Komite Notu" min="0" max="100" step="0.1" />
-  <button onclick="finalMinimiHesapla(1)">Hesapla</button>
-  <p id="d1finalMinSonuc"></p>
-</div>
-
-<!-- Dönem 2 -->
-<div id="donem2" class="tabcontent">
-  <h3>Dönem 2</h3>
-  <p>6 Komite Notlarını Giriniz:</p>
-  <input type="number" id="d2komite1" placeholder="Komite 1" min="0" max="100" step="0.1" />
-  <input type="number" id="d2komite2" placeholder="Komite 2" min="0" max="100" step="0.1" />
-  <input type="number" id="d2komite3" placeholder="Komite 3" min="0" max="100" step="0.1" />
-  <input type="number" id="d2komite4" placeholder="Komite 4" min="0" max="100" step="0.1" />
-  <input type="number" id="d2komite5" placeholder="Komite 5" min="0" max="100" step="0.1" />
-  <input type="number" id="d2komite6" placeholder="Komite 6" min="0" max="100" step="0.1" />
-  <p>Final Notu:</p>
-  <input type="number" id="d2final" placeholder="Final Notu" min="0" max="100" step="0.1" />
-  <br /><br />
+<section id="donem2">
+  <h2>Dönem 2 Not Hesaplama</h2>
+  <div id="d2komiteler">
+    <div class="komite-group">
+      <label>Komite 1: <input type="number" id="d2komite1" min="0" max="100" step="0.1" /></label>
+      <label>Komite 2: <input type="number" id="d2komite2" min="0" max="100" step="0.1" /></label>
+      <label>Komite 3: <input type="number" id="d2komite3" min="0" max="100" step="0.1" /></label>
+      <label>Komite 4: <input type="number" id="d2komite4" min="0" max="100" step="0.1" /></label>
+      <label>Komite 5: <input type="number" id="d2komite5" min="0" max="100" step="0.1" /></label>
+      <label>Komite 6: <input type="number" id="d2komite6" min="0" max="100" step="0.1" /></label>
+    </div>
+  </div>
+  <label>Final Notu: <input type="number" id="d2finalNot" min="0" max="100" step="0.1" /></label>
   <button onclick="hesaplaDonem(2)">Hesapla</button>
+  <p id="d2sonuc"></p>
+</section>
 
-  <h4>Son Komiteden Alınacak Nota Göre Finalden Minimum Not Hesapla</h4>
-  <p>Son Komiteden Alacağınız Notu Giriniz:</p>
-  <input type="number" id="d2sonKomiteNot" placeholder="Son Komite Notu" min="0" max="100" step="0.1" />
-  <button onclick="finalMinimiHesapla(2)">Hesapla</button>
-  <p id="d2finalMinSonuc"></p>
-</div>
-
-<!-- Dönem 3 -->
-<div id="donem3" class="tabcontent">
-  <h3>Dönem 3</h3>
-  <p>6 Komite Notlarını Giriniz:</p>
-  <input type="number" id="d3komite1" placeholder="Komite 1" min="0" max="100" step="0.1" />
-  <input type="number" id="d3komite2" placeholder="Komite 2" min="0" max="100" step="0.1" />
-  <input type="number" id="d3komite3" placeholder="Komite 3" min="0" max="100" step="0.1" />
-  <input type="number" id="d3komite4" placeholder="Komite 4" min="0" max="100" step="0.1" />
-  <input type="number" id="d3komite5" placeholder="Komite 5" min="0" max="100" step="0.1" />
-  <input type="number" id="d3komite6" placeholder="Komite 6" min="0" max="100" step="0.1" />
-  <p>Final Notu:</p>
-  <input type="number" id="d3final" placeholder="Final Notu" min="0" max="100" step="0.1" />
-  <br /><br />
+<section id="donem3">
+  <h2>Dönem 3 Not Hesaplama</h2>
+  <div id="d3komiteler">
+    <div class="komite-group">
+      <label>Komite 1: <input type="number" id="d3komite1" min="0" max="100" step="0.1" /></label>
+      <label>Komite 2: <input type="number" id="d3komite2" min="0" max="100" step="0.1" /></label>
+      <label>Komite 3: <input type="number" id="d3komite3" min="0" max="100" step="0.1" /></label>
+      <label>Komite 4: <input type="number" id="d3komite4" min="0" max="100" step="0.1" /></label>
+      <label>Komite 5: <input type="number" id="d3komite5" min="0" max="100" step="0.1" /></label>
+      <label>Komite 6: <input type="number" id="d3komite6" min="0" max="100" step="0.1" /></label>
+    </div>
+  </div>
+  <label>Final Notu: <input type="number" id="d3finalNot" min="0" max="100" step="0.1" /></label>
   <button onclick="hesaplaDonem(3)">Hesapla</button>
-
-  <h4>Son Komiteden Alınacak Nota Göre Finalden Minimum Not Hesapla</h4>
-  <p>Son Komiteden Alacağınız Notu Giriniz:</p>
-  <input type="number" id="d3sonKomiteNot" placeholder="Son Komite Notu" min="0" max="100" step="0.1" />
-  <button onclick="finalMinimiHesapla(3)">Hesapla</button>
-  <p id="d3finalMinSonuc"></p>
-</div>
+  <p id="d3sonuc"></p>
+</section>
 
 <script src="script.js"></script>
 </body>
